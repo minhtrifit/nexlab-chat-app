@@ -1,8 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import Slidebar from "./components/Slidebar";
-import "./App.css";
 import HomePage from "./pages/HomePage";
 import ChatPage from "./pages/ChatPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import "./App.css";
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/chat" element={<ChatPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
