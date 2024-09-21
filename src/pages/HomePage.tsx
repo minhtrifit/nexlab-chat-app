@@ -1,5 +1,5 @@
 import ToggleTheme from "../components/ToggleTheme";
-import Drawer from "../components/Drawer";
+import DrawerBtn from "../components/DrawerBtn";
 
 const HomePage = () => {
   return (
@@ -13,7 +13,7 @@ const HomePage = () => {
         </div>
         <div className="flex items-center gap-3">
           <ToggleTheme />
-          <Drawer />
+          <DrawerBtn />
         </div>
       </div>
     </div>

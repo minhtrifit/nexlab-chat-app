@@ -13,7 +13,8 @@ const ToggleTheme = () => {
 
   return (
     <button
-      className="w-[40px] h-[40px] border border-black dark:border-white rounded-md flex items-center justify-center"
+      className="w-[40px] h-[40px] border border-black dark:border-white rounded-md flex items-center justify-center
+                  hover:bg-zinc-200 dark:hover:bg-primary-gray"
       onClick={() => {
         setTheme(theme === "light" ? "dark" : "light");
         toggleThemeMode();

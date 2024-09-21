@@ -1,49 +1,43 @@
-import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { SLIDEBAR_ITEMS } from "./Slidebar";
-
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
-
 import { USER_TYPE } from "../types/user.type";
-import { VscThreeBars } from "react-icons/vsc";
+
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../redux/store";
+import { updateIsOpenDrawer } from "../redux/actions/users.action";
+
 import { IoMdClose } from "react-icons/io";
 
 const Drawer = () => {
+  const dispath = useDispatch();
   const location = useLocation();
 
   const currentUser = useSelector<RootState, USER_TYPE | null>(
     (state) => state.users.currentUser
   );
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const isOpenDrawer = useSelector<RootState, boolean>(
+    (state) => state.users.isOpenDrawer
+  );
 
   const toggleDrawer = () => {
-    setIsOpen(!isOpen);
+    dispath(updateIsOpenDrawer(!isOpenDrawer));
   };
 
   return (
     <>
-      <button
-        onClick={toggleDrawer}
-        className="block sm:hidden w-[40px] h-[40px] p-2 border border-black dark:border-white rounded-md
-                    flex items-center justify-center focus:outline-none"
-      >
-        <VscThreeBars size={20} />
-      </button>
-
       <div
         className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${
-          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          isOpenDrawer ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={toggleDrawer}
       ></div>
 
       <div
-        className={`fixed top-0 left-0 w-64 h-full text-gray-600 dark:text-white
+        className={`fixed top-0 left-0 w-64 h-full overflow-y-auto text-gray-600 dark:text-white
                     bg-light-gray dark:bg-primary-gray shadow-lg z-50 transform transition-transform duration-300 ${
-                      isOpen ? "translate-x-0" : "-translate-x-full"
+                      isOpenDrawer ? "translate-x-0" : "-translate-x-full"
                     }`}
       >
         <button
@@ -57,18 +51,18 @@ const Drawer = () => {
                   flex flex-col items-center pt-[50px]"
         >
           <div className="flex flex-col items-center justify-center gap-3">
-            <div className="w-[100px] h-[100px] rounded-full bg-white flex items-center justify-center">
+            <div className="w-[80px] h-[80px] rounded-full bg-white flex items-center justify-center">
               <img
                 className="w-[90%] h-[90%] rounded-full"
                 src="/assets/avatar.png"
                 alt="avatar"
               />
             </div>
-            <span className="text-xl font-bold">
+            <span className="text-md font-bold">
               {currentUser?.name ? currentUser?.name : "undifined"}
             </span>
           </div>
-          <div className="mt-10 w-full flex flex-col gap-3">
+          <div className="mt-5 w-full flex flex-col gap-y-1">
             {SLIDEBAR_ITEMS?.map(
               (item: {
                 name: string;
@@ -78,7 +72,7 @@ const Drawer = () => {
                 return (
                   <Link to={item?.url} key={uuidv4()}>
                     <div
-                      className={`relative w-full px-6 py-3 flex items-center gap-5 ${
+                      className={`relative w-full px-6 py-3 flex items-center gap-x-5 ${
                         location?.pathname === item?.url &&
                         "bg-active-gray dark:bg-sky-500 text-sky-600 dark:text-white"
                       }`}
