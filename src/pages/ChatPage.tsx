@@ -15,6 +15,8 @@ import SearchBox from "../components/SearchBox";
 import FriendBox from "../components/FriendBox";
 import ChatBox from "../components/ChatBox";
 import NotificationBtn from "../components/NotificationBtn";
+import FriendDrawerBtn from "../components/FriendDrawBtn";
+import FriendDrawer from "../components/FriendDrawer";
 
 const ChatPage = () => {
   const dispath = useDispatch();
@@ -74,7 +76,7 @@ const ChatPage = () => {
     const chatsSaveData = localStorage.getItem("chats");
     if (chatsSaveData !== null) {
       const chatsSaveDataParse = JSON.parse(chatsSaveData);
-      console.log(chatsSaveDataParse);
+      console.log("SAVE DATA:", chatsSaveDataParse);
       dispath(updateChat(chatsSaveDataParse));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,6 +87,12 @@ const ChatPage = () => {
       className="w-full sm:w-[calc(100%-250px)] max-h-full p-6 overflow-hidden text-black dark:text-white
                   bg-gray-100 dark:bg-secondary-gray"
     >
+      <FriendDrawer
+        friends={friendList}
+        handleTargetChat={handleTargetChat}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
       <div className="w-full h-[50px] flex items-center justify-between">
         <div>
           <span className="text-2xl text-gray-600 dark:text-sky-500 font-bold">
@@ -93,6 +101,7 @@ const ChatPage = () => {
         </div>
         <div className="flex items-center gap-3">
           <NotificationBtn />
+          <FriendDrawerBtn />
           <ToggleTheme />
           <DrawerBtn />
         </div>

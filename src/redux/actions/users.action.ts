@@ -8,3 +8,7 @@ export const updateUserProfile = createAction<USER_TYPE>(
 export const updateIsOpenDrawer = createAction<boolean>(
   "users/updateIsOpenDrawer"
 );
+
+export const updateIsOpenFriendDrawer = createAction<boolean>(
+  "users/updateIsOpenFriendDrawer"
+);
