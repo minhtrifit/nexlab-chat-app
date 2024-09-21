@@ -1,10 +1,10 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
 import { USER_TYPE } from "../types/user.type";
-import { formatDate, getLastestChat } from "../utils/utils";
 import { CHAT_TYPE } from "../types/chat.type";
-import { useEffect, useState } from "react";
+import { formatDate, getLastestChat } from "../utils/utils";
 
 interface PropType {
   user: USER_TYPE;
@@ -47,14 +47,16 @@ const FriendBox = (props: PropType) => {
           {user?.name ? user?.name.charAt(0) : "undefined"}
         </div>
         <div className="flex flex-col gap-1">
-          <span>{user?.name}</span>
-          <span className="max-w-[200px] truncate text-sm text-gray-500 dark:text-gray-400">
+          <span className="font-semibold hover:cursor-default">
+            {user?.name}
+          </span>
+          <span className="max-w-[200px] truncate text-sm text-gray-500 dark:text-gray-400 hover:cursor-default">
             {lastestChat?.message}
           </span>
         </div>
       </div>
       <div className="flex flex-col items-end gap-3">
-        <span className="max-w-[100px] truncate text-sm text-gray-500 dark:text-gray-400">
+        <span className="max-w-[100px] truncate text-sm text-gray-500 dark:text-gray-400 hover:cursor-default">
           {lastestChat?.sendAt ? formatDate(lastestChat?.sendAt) : "undefined"}
         </span>
         {messageCount === 0 ? (

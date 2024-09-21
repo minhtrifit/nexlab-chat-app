@@ -1,5 +1,6 @@
 import ToggleTheme from "../components/ToggleTheme";
 import DrawerBtn from "../components/DrawerBtn";
+import NotificationBtn from "../components/NotificationBtn";
 
 const HomePage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage = () => {
           </span>
         </div>
         <div className="flex items-center gap-3">
+          <NotificationBtn />
           <ToggleTheme />
           <DrawerBtn />
         </div>

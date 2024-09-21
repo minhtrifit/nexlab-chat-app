@@ -5,19 +5,42 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
 import { USER_TYPE } from "../types/user.type";
+import { CHAT_TYPE } from "../types/chat.type";
+import { getLastestChat } from "../utils/utils";
 
 import ToggleTheme from "../components/ToggleTheme";
 import DrawerBtn from "../components/DrawerBtn";
 import SearchBox from "../components/SearchBox";
 import FriendBox from "../components/FriendBox";
+import ChatBox from "../components/ChatBox";
+import NotificationBtn from "../components/NotificationBtn";
 
 const ChatPage = () => {
+  const currentUser = useSelector<RootState, USER_TYPE | null>(
+    (state) => state.users.currentUser
+  );
+
   const friends = useSelector<RootState, USER_TYPE[]>(
     (state) => state.users.friends
   );
 
+  const chats = useSelector<RootState, CHAT_TYPE[]>(
+    (state) => state.chats.chats
+  );
+
   const [searchValue, setSearchValue] = useState<string>("");
   const [friendList, setFriendList] = useState<USER_TYPE[]>(friends);
+  const [targetChat, setTargetChat] = useState<{
+    user: USER_TYPE | null;
+    chats: CHAT_TYPE[];
+  }>({ user: null, chats: [] });
+
+  const handleTargetChat = (user: USER_TYPE) => {
+    if (currentUser?.id && user?.id) {
+      const filterChats = getLastestChat(chats, currentUser?.id, user?.id);
+      setTargetChat({ user: user, chats: filterChats });
+    }
+  };
 
   useEffect(() => {
     if (searchValue !== "") {
@@ -32,6 +55,18 @@ const ChatPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
+  useEffect(() => {
+    if (friends?.length > 1 && currentUser?.id && friends[0]?.id) {
+      const filterChats = getLastestChat(
+        chats,
+        currentUser?.id,
+        friends[0]?.id
+      );
+      setTargetChat({ user: friends[0], chats: filterChats });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [friends]);
+
   return (
     <div
       className="w-full sm:w-[calc(100%-250px)] max-h-full p-6 overflow-hidden text-black dark:text-white
@@ -44,33 +79,40 @@ const ChatPage = () => {
           </span>
         </div>
         <div className="flex items-center gap-3">
+          <NotificationBtn />
           <ToggleTheme />
           <DrawerBtn />
         </div>
       </div>
-      <div className="mt-10 w-full h-[calc(100vh-150px)] flex gap-x-5">
-        <div className="hidden lg:flex w-[30%] min-w-[420px] flex-col gap-y-10">
+      <div className="mt-5 w-full h-[calc(100vh-150px)] flex gap-x-5">
+        <div className="hidden lg:flex w-[30%] min-w-[420px] flex-col gap-y-5">
           <SearchBox
             searchValue={searchValue}
             setSearchValue={setSearchValue}
           />
           <div className="w-full max-h-full overflow-y-auto flex flex-col gap-y-5 p-6">
             {friendList?.map((friend: USER_TYPE) => {
-              const a = [0, 1, 2, 3];
-              const randomIndex = Math.floor(Math.random() * a.length);
-              const randomValue = a[randomIndex];
-
               return (
-                <FriendBox
+                <div
                   key={uuidv4()}
-                  user={friend}
-                  messageCount={randomValue}
-                />
+                  onClick={() => {
+                    handleTargetChat(friend);
+                  }}
+                >
+                  <FriendBox
+                    user={friend}
+                    messageCount={
+                      friend?.messageCount ? friend?.messageCount : 0
+                    }
+                  />
+                </div>
               );
             })}
           </div>
         </div>
-        <div className="w-[70%]">Right</div>
+        <div className="w-[100%] lg:w-[70%]">
+          <ChatBox targetChat={targetChat} setTargetChat={setTargetChat} />
+        </div>
       </div>
     </div>
   );

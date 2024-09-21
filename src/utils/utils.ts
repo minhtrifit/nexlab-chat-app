@@ -6,26 +6,31 @@ export const FRIENDS_DATA: USER_TYPE[] = [
     id: "1a2b3c4d",
     name: "Alice Johnson",
     location: "New York, USA",
+    messageCount: 1,
   },
   {
     id: "2e3f4g5h",
     name: "Brandon Lee",
     location: "Toronto, Canada",
+    messageCount: 0,
   },
   {
     id: "3i4j5k6l",
     name: "Catherine Nguyen",
     location: "Sydney, Australia",
+    messageCount: 3,
   },
   {
     id: "4m5n6o7p",
     name: "Daniel Martinez",
     location: "London, UK",
+    messageCount: 2,
   },
   {
     id: "5q6r7s8t",
     name: "Emily Zhao",
     location: "Beijing, China",
+    messageCount: 1,
   },
 ];
 
@@ -34,35 +39,49 @@ export const CHATS_DATA = [
     id: "1001",
     fromId: "1",
     toId: "1a2b3c4d",
-    sendAt: "15/09/2024 10:00:00", // September
+    sendAt: "15/09/2024 10:00:00",
     message: "Hey Alice, how are you?",
   },
   {
     id: "1002",
     fromId: "1a2b3c4d",
     toId: "1",
-    sendAt: "03/10/2024 10:05:00", // October
+    sendAt: "03/10/2024 10:05:00",
     message: "I'm good, thanks for asking!",
+  },
+  {
+    id: "1002a",
+    fromId: "1a2b3c4d",
+    toId: "1",
+    sendAt: "03/10/2024 10:06:00",
+    message: "How about your internship test?",
+  },
+  {
+    id: "1002b",
+    fromId: "1a2b3c4d",
+    toId: "1",
+    sendAt: "03/10/2024 10:07:00",
+    message: "I hope it got well ^^",
   },
   {
     id: "1003",
     fromId: "1",
     toId: "2e3f4g5h",
-    sendAt: "22/11/2024 10:10:00", // November
+    sendAt: "22/11/2024 10:10:00",
     message: "Brandon, are you free this weekend?",
   },
   {
     id: "1004",
     fromId: "2e3f4g5h",
     toId: "1",
-    sendAt: "07/12/2024 10:15:00", // December
+    sendAt: "07/12/2024 10:15:00",
     message: "Yeah, let's catch up!",
   },
   {
     id: "1005",
     fromId: "1",
     toId: "3i4j5k6l",
-    sendAt: "19/01/2025 10:20:00", // January
+    sendAt: "19/01/2025 10:20:00",
     message: "Catherine, have you finished the project?",
   },
   {
@@ -166,9 +185,7 @@ export const getLastestChat = (
   for (let i = 0; i < chats?.length; ++i) {
     if (chats[i].fromId === fromId && chats[i].toId === toId)
       lastestChats.push(chats[i]);
-  }
 
-  for (let i = 0; i < chats?.length; ++i) {
     if (chats[i].fromId === toId && chats[i].toId === fromId)
       lastestChats.push(chats[i]);
   }
@@ -188,4 +205,20 @@ export const formatDate = (dateString: string) => {
   }).format(date);
 
   return formattedDate;
+};
+
+// Output: 03/10/2024 10:05:00
+export const getSendAtTime = () => {
+  const date = new Date();
+
+  const pad = (num: any) => String(num).padStart(2, "0");
+
+  const day = pad(date.getDate());
+  const month = pad(date.getMonth() + 1);
+  const year = date.getFullYear();
+  const hours = pad(date.getHours());
+  const minutes = pad(date.getMinutes());
+  const seconds = pad(date.getSeconds());
+
+  return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
 };

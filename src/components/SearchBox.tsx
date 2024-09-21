@@ -25,7 +25,7 @@ const SearchBox = (props: PropType) => {
         size={25}
       />
       <input
-        className="w-full px-10 py-2 text-md shadow-md dark:bg-primary-gray
+        className="w-full px-10 py-4 text-md shadow-md dark:bg-primary-gray
                     focus:outline-none focus:ring-2 focus:ring-light-gray dark:focus:ring-sky-500"
         placeholder="Search"
         value={searchValue}
