@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
+import { updateChat } from "../redux/actions/chat.actions";
 
 import { USER_TYPE } from "../types/user.type";
 import { CHAT_TYPE } from "../types/chat.type";
@@ -16,6 +17,8 @@ import ChatBox from "../components/ChatBox";
 import NotificationBtn from "../components/NotificationBtn";
 
 const ChatPage = () => {
+  const dispath = useDispatch();
+
   const currentUser = useSelector<RootState, USER_TYPE | null>(
     (state) => state.users.currentUser
   );
@@ -66,6 +69,16 @@ const ChatPage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [friends]);
+
+  useEffect(() => {
+    const chatsSaveData = localStorage.getItem("chats");
+    if (chatsSaveData !== null) {
+      const chatsSaveDataParse = JSON.parse(chatsSaveData);
+      console.log(chatsSaveDataParse);
+      dispath(updateChat(chatsSaveDataParse));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div

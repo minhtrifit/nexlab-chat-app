@@ -26,13 +26,13 @@ const EmojiBtn = (props: PropType) => {
 
   return (
     <div className="relative">
-      <button
+      <div
         onClick={toggleDropdown}
         className="w-[40px] h-[40px] flex items-center justify-center
-                   focus:outline-none hover:text-zinc-500 dark:hover:text-zinc-400"
+                   focus:outline-none hover:text-zinc-500 dark:hover:text-zinc-400 hover:cursor-pointer"
       >
         <FaRegSmile size={23} />
-      </button>
+      </div>
       <div
         className={`absolute left-0 bottom-[60px] mb-2 w-[250px] flex items-center justify-center
                     bg-white dark:bg-primary-gray

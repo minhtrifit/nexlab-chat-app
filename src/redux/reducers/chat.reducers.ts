@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { addChat } from "../actions/chat.actions";
+import { addChat, updateChat } from "../actions/chat.actions";
 import { CHATS_DATA } from "../../utils/utils";
 import { CHAT_TYPE } from "../../types/chat.type";
 
@@ -14,11 +14,17 @@ const initialState: ChatState = {
 };
 
 const chatReducer = createReducer(initialState, (builder) => {
-  builder.addCase(addChat, (state, action) => {
-    const newChat: any = action?.payload;
-    console.log("CHAT DATA:", newChat);
-    state.chats.push(newChat);
-  });
+  builder
+    .addCase(addChat, (state, action) => {
+      const newChat: any = action?.payload;
+      console.log("CHAT DATA:", newChat);
+      state.chats.push(newChat);
+    })
+    .addCase(updateChat, (state, action) => {
+      const newChats: any = action?.payload;
+      console.log("CHATS DATA:", newChats);
+      state.chats = newChats;
+    });
 });
 
 export default chatReducer;

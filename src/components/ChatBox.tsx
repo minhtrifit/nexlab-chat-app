@@ -64,6 +64,10 @@ const ChatBox = (props: PropType) => {
         newChats.push(newChat);
 
         setTargetChat({ ...targetChat, chats: newChats });
+
+        const chatsSaveData: any = [...chats];
+        chatsSaveData.push(newChat);
+        localStorage.setItem("chats", JSON.stringify(chatsSaveData));
       }
     }
   };
