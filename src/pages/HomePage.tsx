@@ -3,7 +3,10 @@ import DrawerBtn from "../components/DrawerBtn";
 
 const HomePage = () => {
   return (
-    <div className="w-full sm:w-[calc(100%-250px)] max-h-full p-6 overflow-y-auto text-black dark:text-white dark:bg-secondary-gray">
+    <div
+      className="w-full sm:w-[calc(100%-250px)] max-h-full p-6 overflow-y-auto text-black dark:text-white
+                  bg-gray-100 dark:bg-secondary-gray"
+    >
       <div className="w-full flex items-center justify-between">
         <div className="flex flex-col sm:flex-row items-start sm:items-end gap-3">
           <img className="w-[150px]" src="/assets/nexlab.svg" />

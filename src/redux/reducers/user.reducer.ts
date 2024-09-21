@@ -1,6 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { updateIsOpenDrawer, updateUserProfile } from "../actions/users.action";
 import { USER_TYPE } from "../../types/user.type";
+import { FRIENDS_DATA } from "../../utils/utils";
 
 // Reducer InitialState interface declair
 interface UserState {
@@ -12,7 +13,7 @@ interface UserState {
 // InitialState value
 const initialState: UserState = {
   currentUser: { id: "1", name: "Lê Minh Trí" },
-  friends: [],
+  friends: FRIENDS_DATA,
   isOpenDrawer: false,
 };
 
