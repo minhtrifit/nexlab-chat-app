@@ -17,6 +17,8 @@ import {
   FaSkype,
   FaChevronLeft,
   FaChevronRight,
+  FaRegClock,
+  FaRegCheckCircle,
 } from "react-icons/fa";
 import { IoIosTrendingUp, IoMdTrendingDown } from "react-icons/io";
 import { AiFillMessage } from "react-icons/ai";
@@ -96,7 +98,7 @@ const HomePage = () => {
         </div>
       </div>
       <div className="mt-8 w-full h-[calc(100vh-300px)] overflow-y-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           <div className="h-[160px] grid rounded-md bg-white dark:bg-primary-gray">
             <div className="px-4 py-2">
               <h1 className="text-md font-thin">All Friends</h1>
@@ -277,11 +279,85 @@ const HomePage = () => {
             className="col-span-2 w-full h-[1400px] sm:h-[800px] rounded-md
                           grid grid-row-2 gap-y-2"
           >
-            <div className="bg-white dark:bg-primary-gray p-4 rounded-md">
-              123
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+              <div className="h-full bg-white dark:bg-primary-gray p-4 rounded-md flex flex-col justify-between">
+                <div className="flex flex-col gap-3">
+                  <h1 className="text-xl font-semibold">Process statistics</h1>
+                  <div className="w-full my-5 flex gap-3">
+                    <h1 className="font-bold text-4xl">64%</h1>
+                    <div className="text-sm font-thin flex flex-col text-gray-500 dark:text-gray-400">
+                      <p>Total</p>
+                      <p>activity</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="left-0 w-full grid grid-cols-3 gap-3">
+                  <div
+                    className="bg-zinc-100 dark:bg-secondary-gray rounded-md py-4
+                                flex flex-col gap-y-8 items-center justify-between"
+                  >
+                    <FaRegClock
+                      className="text-white bg-purple-600 rounded-full p-3"
+                      size={45}
+                    />
+                    <div className="flex flex-col items-center">
+                      <p className="text-2xl font-bold">8</p>
+                      <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                        In Progress
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="bg-zinc-100 dark:bg-secondary-gray rounded-md py-4
+                                flex flex-col gap-y-8 items-center justify-between"
+                  >
+                    <FaRegCheckCircle
+                      className="text-white bg-green-600 rounded-full p-3"
+                      size={45}
+                    />
+                    <div className="flex flex-col items-center">
+                      <p className="text-2xl font-bold">12</p>
+                      <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                        Completed
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="bg-zinc-100 dark:bg-secondary-gray rounded-md py-4
+                                flex flex-col gap-y-8 items-center justify-between"
+                  >
+                    <MdDateRange
+                      className="text-white bg-orange-600 rounded-full p-3"
+                      size={45}
+                    />
+                    <div className="flex flex-col items-center">
+                      <p className="text-2xl font-bold">14</p>
+                      <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                        Upcoming
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="h-full bg-white dark:bg-primary-gray p-4 rounded-md flex flex-col justify-between">
+                <div className="flex flex-col gap-5">
+                  <h1 className="text-xl font-semibold">Group course</h1>
+                  <h1 className="text-2xl font-bold">
+                    English punctuation made easy
+                  </h1>
+                  <span className="text-[0.9rem] text-justify text-zinc-500 dark:text-zinc-400">
+                    Punctuation - learn the basics without the pain. People will
+                    never laught at your puncutation again. You do not require
+                    any materials of software.
+                  </span>
+                </div>
+                <button className="bg-light-gray dark:bg-secondary-gray py-2 rounded-md">
+                  Continue learning
+                </button>
+              </div>
             </div>
             <div className="bg-white dark:bg-primary-gray p-4 rounded-md">
-              <div className="w-full flex items-center justify-between">
+              <div className="w-full h-[50px] flex items-center justify-between">
                 <h1 className="text-xl font-semibold">My Schedule</h1>
                 <div className="flex items-center gap-5">
                   <FaChevronLeft
@@ -295,7 +371,7 @@ const HomePage = () => {
                   />
                 </div>
               </div>
-              <div className="mt-8 h-[93%] sm:h-[88%] grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3">
+              <div className="mt-5 h-[calc(100%-70px)] grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3">
                 <div className="bg-zinc-100 dark:bg-secondary-gray rounded-md p-4 flex flex-col justify-between">
                   <div className="flex flex-col gap-5">
                     <p className="text-gray-500 dark:text-gray-400">
