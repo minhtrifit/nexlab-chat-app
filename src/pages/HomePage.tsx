@@ -37,12 +37,68 @@ const ACTIVITY_DATA = [
   { name: "Sun", number: "70%" },
 ];
 
+const names = [
+  "Alice",
+  "Bob",
+  "Charlie",
+  "David",
+  "Emma",
+  "Frank",
+  "Grace",
+  "Hannah",
+  "Ivy",
+  "Jack",
+];
+
 const HomePage = () => {
   const currentUser = useSelector<RootState, USER_TYPE | null>(
     (state) => state.users.currentUser
   );
 
   const [searchValue, setSearchValue] = useState<string>("");
+
+  const randomNumber = (min: number, max: number) =>
+    Math.floor(Math.random() * (max - min + 1)) + min;
+
+  const randomName = () => names[randomNumber(0, names.length - 1)];
+
+  const data = [
+    {
+      name: randomName(),
+      followers: randomNumber(1000, 5000),
+      rate: randomNumber(5, 10),
+      reviews: randomNumber(100, 1000),
+      views: randomNumber(500, 2000),
+    },
+    {
+      name: randomName(),
+      followers: randomNumber(1000, 5000),
+      rate: randomNumber(5, 10),
+      reviews: randomNumber(100, 1000),
+      views: randomNumber(500, 2000),
+    },
+    {
+      name: randomName(),
+      followers: randomNumber(1000, 5000),
+      rate: randomNumber(5, 10),
+      reviews: randomNumber(100, 1000),
+      views: randomNumber(500, 2000),
+    },
+    {
+      name: randomName(),
+      followers: randomNumber(1000, 5000),
+      rate: randomNumber(5, 10),
+      reviews: randomNumber(100, 1000),
+      views: randomNumber(500, 2000),
+    },
+    {
+      name: randomName(),
+      followers: randomNumber(1000, 5000),
+      rate: randomNumber(5, 10),
+      reviews: randomNumber(100, 1000),
+      views: randomNumber(500, 2000),
+    },
+  ];
 
   return (
     <div
@@ -417,7 +473,7 @@ const HomePage = () => {
                   </div>
                   <div className="flex items-center gap-5">
                     <div
-                      className="w-[40px] h-[40px] bg-light-gray dark:bg-primary-gray rounded-full
+                      className="w-[40px] h-[40px] bg-white dark:bg-primary-gray rounded-full
                                     text-sm font-bold flex items-center justify-center"
                     >
                       C
@@ -463,7 +519,54 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <div className="mt-5 w-full p-2 bg-red-500">table</div>
+        <div className="mt-5 w-full bg-white dark:bg-primary-gray rounded-md p-4">
+          <h1 className="text-xl font-semibold">Popular Users</h1>
+          <table className="mt-5 w-full table-auto border-collapse">
+            <thead>
+              <tr className="bg-light-gray dark:bg-sky-500">
+                <th className="px-4 py-2 border border-gray-300 text-left">
+                  Name
+                </th>
+                <th className="px-4 py-2 border border-gray-300 text-left">
+                  Followers
+                </th>
+                <th className="px-4 py-2 border border-gray-300 text-left">
+                  Rate
+                </th>
+                <th className="px-4 py-2 border border-gray-300 text-left">
+                  Reviews
+                </th>
+                <th className="px-4 py-2 border border-gray-300 text-left">
+                  Views
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((row, index) => (
+                <tr
+                  key={index}
+                  className="even:bg-gray-50 dark:even:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-600"
+                >
+                  <td className="px-4 py-2 border border-gray-300">
+                    {row.name}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-300">
+                    {row.followers}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-300">
+                    {row.rate}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-300">
+                    {row.reviews}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-300">
+                    {row.views}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
