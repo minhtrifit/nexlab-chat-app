@@ -519,9 +519,9 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <div className="mt-5 w-full bg-white dark:bg-primary-gray rounded-md p-4">
+        <div className="mt-5 w-full bg-white dark:bg-primary-gray rounded-md p-4 overflow-x-auto">
           <h1 className="text-xl font-semibold">Popular Users</h1>
-          <table className="mt-5 w-full table-auto border-collapse">
+          <table className="mt-5 w-full min-w-[600px] table-auto border-collapse">
             <thead>
               <tr className="bg-light-gray dark:bg-sky-500">
                 <th className="px-4 py-2 border border-gray-300 text-left">
