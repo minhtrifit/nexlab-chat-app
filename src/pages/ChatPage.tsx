@@ -84,8 +84,8 @@ const ChatPage = () => {
 
   return (
     <div
-      className="w-full sm:w-[calc(100%-250px)] max-h-full p-6 overflow-hidden text-black dark:text-white
-                  bg-gray-100 dark:bg-secondary-gray"
+      className="w-full sm:w-[calc(100%-250px)] h-full p-6 overflow-hidden
+                  text-black dark:text-white bg-gray-100 dark:bg-secondary-gray"
     >
       <FriendDrawer
         friends={friendList}
